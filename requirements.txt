@@ -1,0 +1,29 @@
+# Core
+torch>=2.2.0
+numpy>=1.26.0
+tqdm>=4.66.0
+pyyaml>=6.0.1
+
+# Data
+datasets>=2.17.0
+huggingface-hub>=0.21.0
+
+# Training
+wandb>=0.16.0
+
+# Inference / API
+fastapi>=0.109.0
+uvicorn>=0.27.0
+
+# Dev
+pytest>=8.0.0
+black>=24.0.0
+ruff>=0.3.0
+matplotlib>=3.8.0
+ipykernel>=6.29.0
+
+# Demo (optional)
+# gradio>=4.19.0
+
+# Flash Attention (GPU only — install separately on cloud):
+# pip install flash-attn --no-build-isolation
