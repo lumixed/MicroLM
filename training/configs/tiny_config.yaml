@@ -1,0 +1,36 @@
+# Tiny config for local MacBook development testing
+# ~15M params, runs on CPU in a few minutes
+
+run_name: "microlm-tiny-test"
+out_dir: "checkpoints"
+
+# Data
+data_path: "data/tokens"
+val_shards: 1
+
+# Batch config (tiny for CPU)
+batch_size: 2
+ctx_len: 128
+grad_accum_steps: 4
+
+# Optimizer
+max_lr: 1.0e-3
+min_lr: 1.0e-4
+weight_decay: 0.1
+grad_clip: 1.0
+betas: [0.9, 0.95]
+
+# Short schedule for testing
+warmup_steps: 10
+total_steps: 100
+
+# Logging
+log_every: 5
+eval_every: 25
+save_every: 50
+use_wandb: false
+wandb_project: "microlm"
+
+# No grad checkpoint on CPU
+use_grad_checkpoint: false
+dtype: "float32"
