@@ -99,7 +99,7 @@ async def load_model():
     state.model = MicroLM(model_cfg).to(device)
     state.model.load_state_dict(ckpt["model_state_dict"])
     state.model.eval()
-    print(f"[MicroLM Server] Model loaded: {state.model.param_count():,} parameters")
+    print(f"[MicroLM Server] Model loaded successfully")
 
 
 # ──────────────────────────────────────────────
@@ -139,23 +139,22 @@ async def generate_completion(req: GenerateRequest):
     if state.model is None or state.tokenizer is None:
         raise HTTPException(status_code=503, detail="Model not loaded.")
 
-    prompt_ids = state.tokenizer.encode(req.prompt)
-
-    completion_ids = generate(
+    # generate() takes the raw prompt string and returns the full generated text
+    completion = generate(
         model=state.model,
-        prompt_ids=prompt_ids,
+        tokenizer=state.tokenizer,
+        prompt=req.prompt,
         max_new_tokens=req.max_new_tokens,
         temperature=req.temperature,
         top_k=req.top_k,
         top_p=req.top_p,
         device=state.device,
     )
-    completion = state.tokenizer.decode(completion_ids)
 
     return GenerateResponse(
         prompt=req.prompt,
         completion=completion,
-        tokens_generated=len(completion_ids),
+        tokens_generated=len(state.tokenizer.encode(completion)) - len(state.tokenizer.encode(req.prompt)),
     )
 
 

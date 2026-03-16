@@ -57,7 +57,7 @@ def _load_model():
     _model = MicroLM(model_cfg).to(_device)
     _model.load_state_dict(ckpt["model_state_dict"])
     _model.eval()
-    print(f"Model loaded on {_device}: {_model.param_count():,} params")
+    print(f"Model loaded on {_device}")
 
 
 _load_model()
