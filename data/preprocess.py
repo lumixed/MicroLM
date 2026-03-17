@@ -56,7 +56,7 @@ def preprocess(
     print(f"Tokenizer: {tok}")
 
     # Gather files
-    exts = set(extensions or [".py", ".js", ".ts", ".java", ".c", ".cpp", ".go", ".rs", ".md"])
+    exts = set(extensions or [".py", ".js", ".ts", ".java", ".c", ".cpp", ".go", ".rs", ".md", ".txt"])
     if input_path.is_file():
         files = [input_path]
     else:

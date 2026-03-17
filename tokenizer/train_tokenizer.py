@@ -30,7 +30,7 @@ def iter_file(path: Path, extensions: list[str] | None = None):
         print(f"Reading file: {path}")
         yield path.read_text(encoding="utf-8", errors="replace")
     elif path.is_dir():
-        exts = set(extensions or [".py", ".js", ".ts", ".java", ".c", ".cpp", ".go", ".rs"])
+        exts = set(extensions or [".py", ".js", ".ts", ".java", ".c", ".cpp", ".go", ".rs", ".txt"])
         files = [f for f in path.rglob("*") if f.suffix in exts]
         print(f"Found {len(files)} files in {path}")
         for f in files:
